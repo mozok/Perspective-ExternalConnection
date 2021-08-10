@@ -1,0 +1,20 @@
+{
+  "name": "perspective/external-connection",
+  "version": "1.0.0",
+  "description": "N/A",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "*"
+  },
+  "license": [
+    "Apache Software License (ASL)"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Perspective\\ExternalConnection\\": ""
+    }
+  }
+}
