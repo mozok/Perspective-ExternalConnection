@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Perspective\ExternalConnection\Api\Data\ExternalEntityInterface"
+                type="Perspective\ExternalConnection\Model\ExternalEntity"/>
+    <preference for="Perspective\ExternalConnection\Api\Data\ExternalEntitySearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Perspective\ExternalConnection\Api\ExternalEntityRepositoryInterface"
+                type="Perspective\ExternalConnection\Model\ExternalEntityRepository"/>
+</config>
