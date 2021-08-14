@@ -8,6 +8,13 @@
     <preference for="Perspective\ExternalConnection\Api\ExternalEntityRepositoryInterface"
                 type="Perspective\ExternalConnection\Model\ExternalEntityRepository"/>
 
+    <preference for="Perspective\ExternalConnection\Api\Data\AnotherEntityInterface"
+                type="Perspective\ExternalConnection\Model\AnotherEntity"/>
+    <preference for="Perspective\ExternalConnection\Api\Data\AnotherEntitySearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Perspective\ExternalConnection\Api\AnotherEntityRepositoryInterface"
+                type="Perspective\ExternalConnection\Model\AnotherEntityRepository"/>
+
     <!-- 1. If you need just a simple connection - Adjust your resource model -->
     <type name="Perspective\ExternalConnection\Model\ResourceModel\ExternalEntity">
         <arguments>
@@ -23,23 +30,23 @@
             <argument name="connectionName" xsi:type="string">external_db1</argument>
         </arguments>
     </virtualType>
-    <virtualType name="\Db1\Api\ExternalEntityRepositoryInterface"
+    <virtualType name="\Db1\Api\ExternalEntityRepository"
                  type="Perspective\ExternalConnection\Model\ExternalEntityRepository">
         <arguments>
-            <argument name="resource" xsi:type="string">\Db1\ResourceModel\ExternalEntity</argument>
+            <argument name="resource" xsi:type="object">\Db1\ResourceModel\ExternalEntity</argument>
         </arguments>
     </virtualType>
 
     <virtualType name="\Db2\ResourceModel\ExternalEntity"
                  type="Perspective\ExternalConnection\Model\ResourceModel\ExternalEntity">
         <arguments>
-            <argument name="connectionName" xsi:type="string">external_db1</argument>
+            <argument name="connectionName" xsi:type="string">external_db2</argument>
         </arguments>
     </virtualType>
-    <virtualType name="\Db2\Api\ExternalEntityRepositoryInterface"
+    <virtualType name="\Db2\Api\ExternalEntityRepository"
                  type="Perspective\ExternalConnection\Model\ExternalEntityRepository">
         <arguments>
-            <argument name="resource" xsi:type="string">\Db2\ResourceModel\ExternalEntity</argument>
+            <argument name="resource" xsi:type="object">\Db2\ResourceModel\ExternalEntity</argument>
         </arguments>
     </virtualType>
 
@@ -50,23 +57,23 @@
             <argument name="connectionName" xsi:type="string">external_db1</argument>
         </arguments>
     </virtualType>
-    <virtualType name="\Db1\Api\AnotherEntityRepositoryInterface"
+    <virtualType name="\Db1\Api\AnotherEntityRepository"
                  type="Perspective\ExternalConnection\Model\AnotherEntityRepository">
         <arguments>
-            <argument name="resource" xsi:type="string">\Db1\ResourceModel\AnotherEntity</argument>
+            <argument name="resource" xsi:type="object">\Db1\ResourceModel\AnotherEntity</argument>
         </arguments>
     </virtualType>
 
     <virtualType name="\Db2\ResourceModel\AnotherEntity"
                  type="Perspective\ExternalConnection\Model\ResourceModel\AnotherEntity">
         <arguments>
-            <argument name="connectionName" xsi:type="string">external_db1</argument>
+            <argument name="connectionName" xsi:type="string">external_db2</argument>
         </arguments>
     </virtualType>
-    <virtualType name="\Db2\Api\AnotherEntityRepositoryInterface"
+    <virtualType name="\Db2\Api\AnotherEntityRepository"
                  type="Perspective\ExternalConnection\Model\AnotherEntityRepository">
         <arguments>
-            <argument name="resource" xsi:type="string">\Db2\ResourceModel\AnotherEntity</argument>
+            <argument name="resource" xsi:type="object">\Db2\ResourceModel\AnotherEntity</argument>
         </arguments>
     </virtualType>
 
@@ -74,8 +81,8 @@
     <type name="Perspective\ExternalConnection\Model\ExternalEntityRepositoryFactory">
         <arguments>
             <argument name="instanceNames" xsi:type="array">
-                <item name="db1" xsi:type="string">\Db1\Api\ExternalEntityRepositoryInterface</item>
-                <item name="db2" xsi:type="string">\Db2\Api\ExternalEntityRepositoryInterface</item>
+                <item name="db1" xsi:type="string">\Db1\Api\ExternalEntityRepository</item>
+                <item name="db2" xsi:type="string">\Db2\Api\ExternalEntityRepository</item>
             </argument>
         </arguments>
     </type>
@@ -83,10 +90,19 @@
     <type name="Perspective\ExternalConnection\Model\AnotherEntityRepositoryFactory">
         <arguments>
             <argument name="instanceNames" xsi:type="array">
-                <item name="db1" xsi:type="string">\Db1\Api\AnotherEntityRepositoryInterface</item>
-                <item name="db2" xsi:type="string">\Db2\Api\AnotherEntityRepositoryInterface</item>
+                <item name="db1" xsi:type="string">\Db1\Api\AnotherEntityRepository</item>
+                <item name="db2" xsi:type="string">\Db2\Api\AnotherEntityRepository</item>
             </argument>
         </arguments>
     </type>
 
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="perspective_externalconnection_external_connection" xsi:type="object">
+                    Perspective\ExternalConnection\Console\Command\ExternalConnection
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
