@@ -14,7 +14,7 @@ use Perspective\ExternalConnection\Api\Data\ExternalEntitySearchResultsInterface
  * RepositoryInterface for another demonstration model
  * save() and delete() are not declared on purpose, as external DB in this example must be immutable
  */
-interface ExternalEntityRepositoryInterface
+interface ExternalEntityRepositoryInterface extends ExternalRepositoryInterface
 {
     /**
      * Retrive ExternalEntity

@@ -4,7 +4,8 @@
   "description": "N/A",
   "type": "magento2-module",
   "require": {
-    "magento/framework": "*"
+    "magento/framework": "*",
+    "php": "7.4"
   },
   "license": [
     "Apache Software License (ASL)"

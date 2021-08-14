@@ -7,4 +7,77 @@
                 type="Magento\Framework\Api\SearchResults"/>
     <preference for="Perspective\ExternalConnection\Api\ExternalEntityRepositoryInterface"
                 type="Perspective\ExternalConnection\Model\ExternalEntityRepository"/>
+
+    <!-- 1. If you need just a simple connection - Adjust your resource model -->
+    <type name="Perspective\ExternalConnection\Model\ResourceModel\ExternalEntity">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">external_db1</argument>
+        </arguments>
+    </type>
+
+    <!-- 2. If you need several external collection I suggest to use Factory Method -->
+    <!-- 2.1 Prepare ExternalEntity -->
+    <virtualType name="\Db1\ResourceModel\ExternalEntity"
+                 type="Perspective\ExternalConnection\Model\ResourceModel\ExternalEntity">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">external_db1</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="\Db1\Api\ExternalEntityRepositoryInterface"
+                 type="Perspective\ExternalConnection\Model\ExternalEntityRepository">
+        <arguments>
+            <argument name="resource" xsi:type="string">\Db1\ResourceModel\ExternalEntity</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="\Db2\ResourceModel\ExternalEntity"
+                 type="Perspective\ExternalConnection\Model\ResourceModel\ExternalEntity">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">external_db1</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="\Db2\Api\ExternalEntityRepositoryInterface"
+                 type="Perspective\ExternalConnection\Model\ExternalEntityRepository">
+        <arguments>
+            <argument name="resource" xsi:type="string">\Db2\ResourceModel\ExternalEntity</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- 2.2 Prepare AnotherEntity -->
+    <virtualType name="\Db1\ResourceModel\AnotherEntity"
+                 type="Perspective\ExternalConnection\Model\ResourceModel\AnotherEntity">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">external_db1</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="\Db1\Api\AnotherEntityRepositoryInterface"
+                 type="Perspective\ExternalConnection\Model\AnotherEntityRepository">
+        <arguments>
+            <argument name="resource" xsi:type="string">\Db1\ResourceModel\AnotherEntity</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="\Db2\ResourceModel\AnotherEntity"
+                 type="Perspective\ExternalConnection\Model\ResourceModel\AnotherEntity">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">external_db1</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="\Db2\Api\AnotherEntityRepositoryInterface"
+                 type="Perspective\ExternalConnection\Model\AnotherEntityRepository">
+        <arguments>
+            <argument name="resource" xsi:type="string">\Db2\ResourceModel\AnotherEntity</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- 2.3 Prepare repository factories -->
+    <type name="Perspective\ExternalConnection\Model\ExternalEntityRepositoryFactory">
+        <arguments>
+            <argument name="instanceNames" xsi:type="array">
+                <item name="db1" xsi:type="string">\Db1\Api\ExternalEntityRepositoryInterface</item>
+                <item name="db2" xsi:type="string">\Db2\Api\ExternalEntityRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
 </config>

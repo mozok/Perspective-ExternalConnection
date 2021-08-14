@@ -17,12 +17,13 @@ use Perspective\ExternalConnection\Api\ExternalEntityRepositoryInterface;
 use Perspective\ExternalConnection\Model\ResourceModel\ExternalEntity as ExternalEntityResource;
 use Perspective\ExternalConnection\Model\ResourceModel\ExternalEntity\CollectionFactory;
 use Perspective\ExternalConnection\Api\Data\ExternalEntitySearchResultsInterfaceFactory;
+use Perspective\ExternalConnection\Model\ExternalRepositoryInterface;
 
 /**
  * External Entity repository
  * Same as usual Magento 2 Repository, except of getList() modification
  */
-class ExternalEntityRepository implements ExternalEntityRepositoryInterface
+class ExternalEntityRepository implements ExternalEntityRepositoryInterface, ExternalRepositoryInterface
 {
     /**
      * @var ExternalEntityInterface[]
@@ -91,7 +92,8 @@ class ExternalEntityRepository implements ExternalEntityRepositoryInterface
     public function getList(SearchCriteriaInterface $searchCriteria): ExternalEntitySearchResultsInterface
     {
         /**
-         * We need to set our modified ResourceModel to collection
+         * If we configure Repositories as Virtual Types
+         * we need to set our modified ResourceModel to collection
          */
         $collection = $this->collectionFactory->create(['resource' => $this->resource]);
 
