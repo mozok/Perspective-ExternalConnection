@@ -80,4 +80,13 @@
         </arguments>
     </type>
 
+    <type name="Perspective\ExternalConnection\Model\AnotherEntityRepositoryFactory">
+        <arguments>
+            <argument name="instanceNames" xsi:type="array">
+                <item name="db1" xsi:type="string">\Db1\Api\AnotherEntityRepositoryInterface</item>
+                <item name="db2" xsi:type="string">\Db2\Api\AnotherEntityRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
 </config>
