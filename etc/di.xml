@@ -102,6 +102,9 @@
                 <item name="perspective_externalconnection_external_connection" xsi:type="object">
                     Perspective\ExternalConnection\Console\Command\ExternalConnection
                 </item>
+                <item name="perspective_externalconnection_sclsrv_connection" xsi:type="object">
+                    Perspective\ExternalConnection\Console\Command\SclsrvConnection
+                </item>
             </argument>
         </arguments>
     </type>

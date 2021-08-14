@@ -92,4 +92,57 @@ Prepare Factory for Repositories
 </type>
 ```
 
-See usage example in \Perspective\ExternalConnection\Console\Command\ExternalConnection
+See usage example in `\Perspective\ExternalConnection\Console\Command\ExternalConnection`
+
+## 3. Get data from non MySQL DB
+
+Magento Resource Models use `\Magento\Framework\DB\Adapter\AdapterInterface` to establish connection to database.
+Now Magento Framework has only Mysql implementation.
+
+But one could use `\Zend_Db` to establish connections to different DBMS.
+For example to load data from MsSQL DB:
+- add connection data to `env.php` (see docs/env.php.sample)
+```
+'db' => [
+    'connection' => [
+        'default' => [...]
+        'sqlsrv' => [
+            'host' => '',
+            'dbname' => 'dotnet_db',
+            'username' => 'SA',
+            'password' => 'YourStrongPassw0rd'
+        ]
+    ]
+]
+```
+- load configuration using `Magento\Framework\App\DeploymentConfig`
+```
+$connectionData = $this->deploymentConfig->get('db/connection/sqlsrv');
+```
+- create `\Zend_Db_Adapter_Sqlsrv`
+```
+$dbAdapter = $this->mssqlAdapterFactory->factory('Sqlsrv', $connectionData);
+```
+- use `$dbAdapter` to load needed data
+```
+$select = $dbAdapter->select()->from(
+            ['Table'],
+            ['FieldID', 'DataField', 'LinkField']
+    );
+
+$data = $dbAdapter->fetchAll($select);
+```
+- using `$dbAdapter` one can load all rows or filter by condition
+```
+$select = $dbAdapter->select()
+    ->from(...)
+    ->where('LinkField = ?', $linkFieldId);
+
+$data = $dbAdapter->fetchAll($select);
+```
+- or load just one row
+```
+$dataRow = $dbAdapter->fetchRow($select);
+```
+
+For example see `\Perspective\ExternalConnection\Console\Command\SclsrvConnection`
