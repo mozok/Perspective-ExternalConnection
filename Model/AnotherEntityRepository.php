@@ -10,33 +10,33 @@ namespace Perspective\ExternalConnection\Model;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Perspective\ExternalConnection\Api\Data\ExternalEntityInterface;
-use Perspective\ExternalConnection\Api\Data\ExternalEntityInterfaceFactory;
-use Perspective\ExternalConnection\Api\Data\ExternalEntitySearchResultsInterface;
-use Perspective\ExternalConnection\Api\ExternalEntityRepositoryInterface;
-use Perspective\ExternalConnection\Model\ResourceModel\ExternalEntity as ExternalEntityResource;
-use Perspective\ExternalConnection\Model\ResourceModel\ExternalEntity\CollectionFactory;
-use Perspective\ExternalConnection\Api\Data\ExternalEntitySearchResultsInterfaceFactory;
+use Perspective\ExternalConnection\Api\Data\AnotherEntityInterface;
+use Perspective\ExternalConnection\Api\Data\AnotherEntityInterfaceFactory;
+use Perspective\ExternalConnection\Api\Data\AnotherEntitySearchResultsInterface;
+use Perspective\ExternalConnection\Api\AnotherEntityRepositoryInterface;
+use Perspective\ExternalConnection\Model\ResourceModel\AnotherEntity as AnotherEntityResource;
+use Perspective\ExternalConnection\Model\ResourceModel\AnotherEntity\CollectionFactory;
+use Perspective\ExternalConnection\Api\Data\AnotherEntitySearchResultsInterfaceFactory;
 use Perspective\ExternalConnection\Model\ExternalRepositoryInterface;
 
 /**
- * External Entity repository
+ * Another Entity repository
  * Same as usual Magento 2 Repository, except of getList() modification
  */
-class ExternalEntityRepository implements ExternalEntityRepositoryInterface
+class AnotherEntityRepository implements AnotherEntityRepositoryInterface
 {
     /**
-     * @var ExternalEntityInterface[]
+     * @var AnotherEntityInterface[]
      */
     protected $instances = [];
 
     /**
-     * @var ExternalEntityInterfaceFactory
+     * @var AnotherEntityInterfaceFactory
      */
-    private $externalEntityFactory;
+    private $anotherEntityFactory;
 
     /**
-     * @var ExternalEntityResource
+     * @var AnotherEntityResource
      */
     private $resource;
 
@@ -51,18 +51,18 @@ class ExternalEntityRepository implements ExternalEntityRepositoryInterface
     private $collectionProcessor;
 
     /**
-     * @var ExternalEntitySearchResultsInterfaceFactory
+     * @var AnotherEntitySearchResultsInterfaceFactory
      */
     private $searchResultsFactory;
 
     public function __construct(
-        ExternalEntityInterfaceFactory $externalEntityFactory,
-        ExternalEntityResource $resource,
+        AnotherEntityInterfaceFactory $anotherEntityFactory,
+        AnotherEntityResource $resource,
         CollectionFactory $collectionFactory,
         CollectionProcessorInterface $collectionProcessor,
-        ExternalEntitySearchResultsInterfaceFactory $searchResultsFactory
+        AnotherEntitySearchResultsInterfaceFactory $searchResultsFactory
     ) {
-        $this->externalEntityFactory = $externalEntityFactory;
+        $this->anotherEntityFactory = $anotherEntityFactory;
         $this->resource = $resource;
         $this->collectionFactory = $collectionFactory;
         $this->collectionProcessor = $collectionProcessor;
@@ -72,13 +72,13 @@ class ExternalEntityRepository implements ExternalEntityRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function get($entityId): ExternalEntityInterface
+    public function get($entityId): AnotherEntityInterface
     {
-        $entity = $this->externalEntityFactory->create();
+        $entity = $this->anotherEntityFactory->create();
         if (!isset($this->instances[$entityId])) {
             $this->resource->load($entity, $entityId);
             if (!$entity->getId()) {
-                throw new NoSuchEntityException(__('ExternalEntity with id "%1" does not exist.', $entityId));
+                throw new NoSuchEntityException(__('AnotherEntity with id "%1" does not exist.', $entityId));
             }
             $this->instances[$entityId] = $entity;
         }
@@ -89,7 +89,7 @@ class ExternalEntityRepository implements ExternalEntityRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): ExternalEntitySearchResultsInterface
+    public function getList(SearchCriteriaInterface $searchCriteria): AnotherEntitySearchResultsInterface
     {
         /**
          * If we configure Repositories as Virtual Types
