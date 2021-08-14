@@ -32,5 +32,5 @@ interface ExternalEntityRepositoryInterface extends ExternalRepositoryInterface
      */
     public function getList(
         \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-    ): ExternalEntitySearchResultsInterface;
+    );
 }

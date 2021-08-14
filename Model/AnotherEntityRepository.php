@@ -89,7 +89,7 @@ class AnotherEntityRepository implements AnotherEntityRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): AnotherEntitySearchResultsInterface
+    public function getList(SearchCriteriaInterface $searchCriteria)
     {
         /**
          * If we configure Repositories as Virtual Types

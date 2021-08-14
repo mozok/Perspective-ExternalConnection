@@ -20,16 +20,16 @@ interface ExternalEntityInterface
 
     /**
      * Getter for ID
-     * @return int
+     * @return int|string
      */
-    public function getId(): int;
+    public function getId();
 
     /**
      * Setter for ID
-     * @param int $entityId
+     * @param int|string $entityId
      * @return \Perspective\ExternalConnection\Api\Data\ExternalEntityInterface
      */
-    public function setId(int $entityId): ExternalEntityInterface;
+    public function setId($entityId);
 
     /**
      * Getter for data_field

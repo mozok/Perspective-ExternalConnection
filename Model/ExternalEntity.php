@@ -32,22 +32,6 @@ class ExternalEntity extends AbstractModel implements ExternalEntityInterface
     /**
      * @inheritdoc
      */
-    public function getId(): int
-    {
-        return (int)$this->getData(self::ID);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setId(int $entityId): ExternalEntityInterface
-    {
-        return $this->setData(self::ID, $entityId);
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getDataField(): string
     {
         return $this->getData(self::DATA_FIELD);

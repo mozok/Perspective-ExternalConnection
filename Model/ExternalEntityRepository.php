@@ -89,7 +89,7 @@ class ExternalEntityRepository implements ExternalEntityRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): ExternalEntitySearchResultsInterface
+    public function getList(SearchCriteriaInterface $searchCriteria)
     {
         /**
          * If we configure Repositories as Virtual Types
