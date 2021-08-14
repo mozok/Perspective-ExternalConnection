@@ -45,6 +45,7 @@ class ExternalConnection extends Command
     /**
      * @param ExternalEntityRepositoryFactory $externalEntityRepositoryFactory
      * @param AnotherEntityRepositoryFactory $anotherEntityRepositoryFactory
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param string|null $name
      */
     public function __construct(
