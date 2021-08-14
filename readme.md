@@ -1,6 +1,6 @@
-#Perspective ExternalConnection
+# Perspective ExternalConnection
 
-##Intro
+## Intro
 
 This module is a demonstration of how to connect several databases to Magento 2
 
